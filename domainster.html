@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domainster — Kushal Rathi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #fffaf0; --coral: #f26b4f; --coral-dark: #d9553b;
+      --navy: #17263a; --slate: #39526f; --muted: #6b7f99;
+      --border: #e8dfd4; --dark-bg: #0f172a; --dark-surface: #1e293b;
+      --dark-border: rgba(255,255,255,0.08); --gold: #f4b63f; --white: #ffffff;
+    }
+    body {
+      background-color: var(--dark-bg);
+      color: var(--white);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 0;
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--dark-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover { color: var(--coral); }
+
+    main {
+      flex: 1; display: flex; align-items: center;
+      padding: 140px 24px 100px;
+    }
+    .project-wrap { max-width: 680px; }
+
+    .category-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 1.25rem;
+    }
+    .project-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800; letter-spacing: -0.025em;
+      color: var(--white); line-height: 1.05;
+      margin-bottom: 2rem;
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--coral); margin-bottom: 2rem;
+    }
+    .project-desc {
+      font-size: 1.05rem; color: var(--muted);
+      line-height: 1.8; max-width: 600px;
+    }
+
+    footer {
+      border-top: 1px solid var(--dark-border);
+      padding: 1.75rem 0 2.25rem;
+      text-align: center;
+      font-size: 0.75rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="index.html" class="nav-logo">Kushal Rathi</a>
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="project-wrap">
+        <span class="category-tag">AI</span>
+        <h1 class="project-name">Domainster</h1>
+        <div class="divider"></div>
+        <p class="project-desc">Domainster is an AI-powered domain valuation tool built for buyers, sellers, and anyone sitting on a domain they're not sure about. Before you spend money registering a name — or walk away from one worth buying — Domainster gives you an instant estimate of what it's actually worth. No forms, no waiting, no broker fees. Type any domain and get a valuation in seconds based on length, keywords, extension, and market demand. Built because most people have no idea what their domain names are worth. Now you do.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Kushal Rathi. Built with Claude Code.</div>
+  </footer>
+</body>
+</html>

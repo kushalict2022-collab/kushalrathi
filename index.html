@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kushal Rathi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream:        #fffaf0;
+      --cream-dark:   #f5efe5;
+      --cream-darker: #ede3d6;
+      --coral:        #f26b4f;
+      --coral-dark:   #d9553b;
+      --coral-light:  #fff0ed;
+      --teal:         #0d9488;
+      --teal-light:   #e6f7f5;
+      --navy:         #17263a;
+      --slate:        #39526f;
+      --muted:        #6b7f99;
+      --border:       #e8dfd4;
+      --dark-bg:      #0f172a;
+      --dark-surface: #1e293b;
+      --dark-border:  rgba(255,255,255,0.08);
+      --gold:         #f4b63f;
+      --white:        #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--navy);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 14px 0;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--coral); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 0; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background-color: var(--cream);
+      padding-top: 60px;
+    }
+    .hero-inner { padding: 80px 0 100px; }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--coral);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-bottom: 2.25rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 13px 30px;
+      background: var(--coral);
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: var(--coral-dark);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-block;
+      padding: 13px 30px;
+      background: transparent;
+      color: var(--navy);
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .btn-ghost:hover {
+      border-color: var(--slate);
+      transform: translateY(-2px);
+    }
+    .hero-tags {
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── STATS STRIP ── */
+    #stats {
+      padding: 0;
+      background: var(--dark-bg);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 1px solid var(--dark-border);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      divide-x: 1px solid var(--dark-border);
+    }
+    .stat-item {
+      padding: 40px 32px;
+      border-right: 1px solid var(--dark-border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-number span { color: var(--white); }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT ── */
+    #about { background-color: var(--cream-dark); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-statement {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+    .about-statement em {
+      font-style: italic;
+      color: var(--coral);
+    }
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 8px 16px;
+      background: var(--coral-light);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--coral-dark);
+      margin-bottom: 1.5rem;
+    }
+    .about-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .about-lines p {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.75;
+    }
+    .about-lines p strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    /* ── TIMELINE ── */
+    #timeline { background-color: var(--cream); }
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 3px solid var(--cream);
+      flex-shrink: 0;
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-dot.teal { background: var(--teal); }
+    .timeline-dot.gold { background: var(--gold); }
+    .timeline-content { flex: 1; }
+    .timeline-date {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── TOOLS ── */
+    #tools { background-color: var(--cream-dark); }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .tool-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .tool-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .tool-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .tool-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background-color: var(--cream); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    }
+    .card-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.25rem;
+    }
+    .card-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--coral);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .card-link:hover { color: var(--coral-dark); }
+
+    /* ── YOUTUBE ── */
+    #youtube { background-color: var(--dark-bg); }
+    #youtube .section-label { color: var(--gold); }
+    #youtube .section-heading { color: var(--white); }
+    .yt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .yt-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .yt-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 10px 20px;
+      background: rgba(244, 182, 63, 0.12);
+      border: 1px solid rgba(244, 182, 63, 0.3);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+    }
+    .yt-stat-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .yt-stat strong {
+      display: block;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .yt-stat span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .yt-card {
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .yt-thumbnail {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .yt-play {
+      width: 56px;
+      height: 56px;
+      background: var(--coral);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      transition: transform 0.2s ease;
+    }
+    .yt-card:hover .yt-play { transform: scale(1.1); }
+    .yt-thumbnail-label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .yt-card-body {
+      padding: 20px 24px;
+    }
+    .yt-channel-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .yt-channel-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── CURRENTLY BUILDING ── */
+    #now { background-color: var(--cream-dark); }
+    .now-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .now-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .now-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .now-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .now-status.active { color: var(--teal); }
+    .now-status.active::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s infinite;
+    }
+    .now-status.planned { color: var(--muted); }
+    .now-status.planned::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .now-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .now-desc {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background-color: var(--dark-bg);
+      text-align: center;
+    }
+    #contact .section-label { color: var(--gold); }
+    .contact-heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .contact-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 2.75rem;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 3rem;
+    }
+    .contact-links a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 12px 28px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .contact-links a:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .contact-links a.primary {
+      background: var(--coral);
+      border-color: var(--coral);
+    }
+    .contact-links a.primary:hover {
+      background: var(--coral-dark);
+      border-color: var(--coral-dark);
+    }
+    .contact-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background-color: var(--dark-bg);
+      border-top: 1px solid var(--dark-border);
+      padding: 1.75rem 0 2.25rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .now-grid { grid-template-columns: repeat(2, 1fr); }
+      .yt-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 64px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .tools-grid { grid-template-columns: 1fr; }
+      .now-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo">Kushal Rathi</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#timeline">Journey</a></li>
+        <li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+<h1 class="hero-headline">
+          Just someone who<br>
+          <em>shows up and learns.</em>
+</h1>
+        <p class="hero-sub">
+          While most 15 year olds are figuring things out — I'm shipping apps, growing a YouTube channel, and competing on chess boards and MUN stages.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">See My Work</a>
+          <a href="#contact" class="btn-ghost">Let's Talk</a>
+        </div>
+        <p class="hero-tags">Builder · Creator · Chess Player · India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">30<span>+</span></div>
+          <div class="stat-label">Apps Shipped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2<span>K+</span></div>
+          <div class="stat-label">YouTube Subscribers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30</div>
+          <div class="stat-label">Days of Creation</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15</div>
+          <div class="stat-label">Years Old</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About</p>
+      <div class="about-grid">
+        <div>
+<h2 class="about-statement">30 apps.<br>30 days.<br><em>Zero excuses.</em></h2>
+        </div>
+        <div class="about-lines">
+          <p>I run <strong>Rapid Sentry</strong> — a YouTube channel with 2,000+ subscribers.</p>
+          <p>I completed <strong>30 Days of Creation</strong> — one shipped app every single day for a month.</p>
+          <p>I play <strong>chess competitively</strong> and represent my school in Model United Nations.</p>
+          <p>I believe the best way to learn something is to <strong>build it, ship it, and do it in public.</strong></p>
+          <p>I'm 15. <strong>This is just the beginning.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="container">
+      <p class="section-label">Journey</p>
+      <h2 class="section-heading">How I Got Here.</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot gold"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">2023</p>
+            <p class="timeline-title">First Line of Code</p>
+            <p class="timeline-desc">Discovered programming at 12 and immediately started building things that probably shouldn't exist yet for a 12-year-old.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot teal"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">2024</p>
+            <p class="timeline-title">Launched Rapid Sentry on YouTube</p>
+            <p class="timeline-desc">Started creating Minecraft content and grew the channel to 2,000+ subscribers while still in school.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">October 2025</p>
+            <p class="timeline-title">Discovered Vibe Coding</p>
+            <p class="timeline-desc">Found a new way to build — fast, intuitive, and momentum-driven. Started shipping real apps without overthinking.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot teal"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">December 2025</p>
+            <p class="timeline-title">The 30 Days of Creation Challenge</p>
+            <p class="timeline-desc">Committed to shipping one new app every single day for 30 days straight. No breaks. No excuses. 30 apps delivered.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot gold"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Now</p>
+            <p class="timeline-title">Still Going</p>
+            <p class="timeline-desc">Exploring new AI tools, growing the YouTube channel, and shipping whatever comes next.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="container">
+      <p class="section-label">Stack</p>
+      <h2 class="section-heading">What I Build With.</h2>
+      <div class="tools-grid">
+
+        <div class="tool-card">
+          <div class="tool-icon">🤖</div>
+          <p class="tool-name">Claude Code</p>
+          <p class="tool-desc">My primary coding companion. I build and ship apps faster than most people plan them.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon">🎨</div>
+          <p class="tool-name">OpenArt</p>
+          <p class="tool-desc">AI image generation for visuals, thumbnails, and anything that needs to look good fast.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon">🔬</div>
+          <p class="tool-name">Google Labs</p>
+          <p class="tool-desc">Experimenting with Google's latest AI tools and prototypes before they go mainstream.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon">✨</div>
+          <p class="tool-name">Google AI Studio</p>
+          <p class="tool-desc">Prototyping and testing AI-powered features with Gemini — fast and free.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon">🎬</div>
+          <p class="tool-name">Clipchamp</p>
+          <p class="tool-desc">Quick video edits for Rapid Sentry content. Gets the job done without the bloat.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon">🖌️</div>
+          <p class="tool-name">Canva</p>
+          <p class="tool-desc">Thumbnails, graphics, and decks — when I need something polished in minutes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h2 class="section-heading">Things I've Shipped.</h2>
+      <div class="projects-grid">
+
+        <div class="card">
+          <p class="card-tag">Health</p>
+          <p class="card-name">BiteBalance</p>
+          <p class="card-desc">AI-powered nutrition tracking app that makes counting macros effortless — no manual logging required.</p>
+          <a href="bitebalance.html" class="card-link">View →</a>
+        </div>
+
+        <div class="card">
+          <p class="card-tag">Founder Tools</p>
+          <p class="card-name">RivalScope</p>
+          <p class="card-desc">Competitor analysis tool that surfaces what your rivals are doing before you even ask.</p>
+          <a href="rivalscope.html" class="card-link">View →</a>
+        </div>
+
+        <div class="card">
+          <p class="card-tag">AI</p>
+          <p class="card-name">Domainster</p>
+          <p class="card-desc">Got a domain idea? Find out if it's worth something. Domainster gives you an instant AI valuation before you buy or sell.</p>
+          <a href="domainster.html" class="card-link">View →</a>
+        </div>
+
+        <div class="card">
+          <p class="card-tag">AI</p>
+          <p class="card-name">RoastMyIdea</p>
+          <p class="card-desc">Submit your business idea. Get brutally honest AI feedback. No sugarcoating, no fluff.</p>
+          <a href="roastmyidea.html" class="card-link">View →</a>
+        </div>
+
+        <div class="card">
+          <p class="card-tag">Game</p>
+          <p class="card-name">PixelPerfect</p>
+          <p class="card-desc">A retro browser game that's harder than it looks and more satisfying to beat.</p>
+          <a href="pixelperfect.html" class="card-link">View →</a>
+        </div>
+
+        <div class="card">
+          <p class="card-tag">Productivity</p>
+          <p class="card-name">ReBuild26</p>
+          <p class="card-desc">A goal-setting app built for 2026 — structured, minimal, and actually motivating.</p>
+          <a href="rebuild26.html" class="card-link">View →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- NOW -->
+  <section id="now">
+    <div class="container">
+      <p class="section-label">Right Now</p>
+      <h2 class="section-heading">Currently Building.</h2>
+      <div class="now-grid">
+
+        <div class="now-card">
+          <div class="now-status active">Learning</div>
+          <p class="now-title">Learning new AI tools</p>
+          <p class="now-desc">Such as ElevenLabs, Notion & much more</p>
+        </div>
+
+        <div class="now-card">
+          <div class="now-status active">Growing</div>
+          <p class="now-title">Rapid Sentry Channel</p>
+          <p class="now-desc">Pushing toward 5K subscribers by end of year. Doubling down on behind-the-scenes build content.</p>
+        </div>
+
+        <div class="now-card">
+          <div class="now-status active">Building</div>
+          <p class="now-title">GitaVerse</p>
+          <p class="now-desc">GitaVerse brings the Bhagavad Gita into the modern age.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2 class="contact-heading">Let's Connect.</h2>
+      <p class="contact-sub">Always open to interesting conversations.</p>
+      <div class="contact-links">
+        <a href="contact.html">Send an Email</a>
+        <a href="https://www.linkedin.com/in/kushalrathi1/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.youtube.com/@RapidSentry" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <p class="contact-note">Based in India · Usually replies within 24 hours</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © 2026 Kushal Rathi. Built with Claude Code.
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
