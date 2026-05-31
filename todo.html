@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo Checklist</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f5f7;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+      min-height: 100vh;
+    }
+    .app {
+      background: #fff;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 24px;
+      height: fit-content;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 4px; color: #1a1a2e; }
+    .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 20px; }
+    .input-row { display: flex; gap: 8px; margin-bottom: 20px; }
+    #new-task {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+    #new-task:focus { border-color: #5b6cff; }
+    #add-btn {
+      padding: 0 20px;
+      background: #5b6cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #add-btn:hover { background: #4453e0; }
+    ul { list-style: none; }
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    li input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+    li .text { flex: 1; font-size: 1rem; color: #333; }
+    li.done .text { text-decoration: line-through; color: #aaa; }
+    .delete {
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.3rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .delete:hover { color: #ff5b5b; }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .clear { background: none; border: none; color: #888; cursor: pointer; }
+    .clear:hover { color: #ff5b5b; }
+    .empty { text-align: center; color: #bbb; padding: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>My Todo List</h1>
+    <p class="subtitle">Stay on top of your tasks</p>
+    <div class="input-row">
+      <input type="text" id="new-task" placeholder="Add a new task..." autocomplete="off">
+      <button id="add-btn">Add</button>
+    </div>
+    <ul id="list"></ul>
+    <div class="footer">
+      <span id="count">0 tasks left</span>
+      <button class="clear" id="clear-done">Clear completed</button>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('new-task');
+    const addBtn = document.getElementById('add-btn');
+    const list = document.getElementById('list');
+    const count = document.getElementById('count');
+    const clearBtn = document.getElementById('clear-done');
+
+    let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    function save() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function render() {
+      list.innerHTML = '';
+      if (tasks.length === 0) {
+        list.innerHTML = '<li class="empty">No tasks yet — add one above!</li>';
+      }
+      tasks.forEach((task, i) => {
+        const li = document.createElement('li');
+        if (task.done) li.classList.add('done');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = task.done;
+        checkbox.addEventListener('change', () => {
+          tasks[i].done = checkbox.checked;
+          save();
+          render();
+        });
+
+        const span = document.createElement('span');
+        span.className = 'text';
+        span.textContent = task.text;
+
+        const del = document.createElement('button');
+        del.className = 'delete';
+        del.innerHTML = '&times;';
+        del.addEventListener('click', () => {
+          tasks.splice(i, 1);
+          save();
+          render();
+        });
+
+        li.append(checkbox, span, del);
+        list.appendChild(li);
+      });
+
+      const left = tasks.filter(t => !t.done).length;
+      count.textContent = `${left} task${left !== 1 ? 's' : ''} left`;
+    }
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) return;
+      tasks.push({ text, done: false });
+      input.value = '';
+      save();
+      render();
+    }
+
+    addBtn.addEventListener('click', addTask);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTask();
+    });
+    clearBtn.addEventListener('click', () => {
+      tasks = tasks.filter(t => !t.done);
+      save();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
